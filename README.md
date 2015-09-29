@@ -2,15 +2,9 @@
 
 ### JavaScript hyper-lapse utility for Google Street View.
 
-![image](https://s3.amazonaws.com/tllabs.hyperlapse/hyperlapse.gif)
-
 This library was written to create dynamic hyper-lapse (time-lapse with movement) sequences using Google Street View. 
+This specific version of the library has been fork to focus on retriving the sequences of images in bulk.
 
-[See it action.](http://hyperlapse.tllabs.io)
-
-[Read about this project.](http://www.teehanlax.com/labs/hyperlapse/)
-
-[Video of what's possible.](https://vimeo.com/63653873)
 
 ## Example
 
@@ -61,6 +55,7 @@ directions_service.route(route.request, function(response, status) {
 - [Three.js](https://github.com/mrdoob/three.js) (r57)
 - a modified version of [GSVPano.js](https://github.com/pnitsch/GSVPano.js)
 - [Google Maps API v3.12](https://developers.google.com/maps/documentation/javascript/3.exp/reference)
+- [JsZip](https://stuk.github.io/jszip/)
 
   
 ## API Docs 
