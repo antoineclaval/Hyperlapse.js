@@ -45,6 +45,8 @@ var pointOnLine = function(t, a, b) {
  */
 var HyperlapsePoint = function(location, pano_id, params ) {
 
+	var zip = new JSZip();
+
 	var self = this;
 	var params = params || {};
 
@@ -214,6 +216,20 @@ var Hyperlapse = function(container, params) {
 		canvas.setAttribute('height',this.canvas.height);
 		context.drawImage(this.canvas, 0, 0);
 
+		//console.log("gne "+_point_index + " " + canvas);
+
+		var url = canvas.toDataURL();
+		//console.log(url);
+ 
+ 		var newImg = document.createElement("img");
+ 		newImg.src = url;
+
+ 		var cleanNumber = _point_index +1 ;
+ 		if ( cleanNumber < 10 ) {
+ 			cleanNumber = "0"+cleanNumber
+ 		}
+ 		zip.file("image_"+cleanNumber+ ".png", newImg.src.substr(newImg.src.indexOf(',')+1), {base64: true});
+
 		_h_points[_point_index].image = canvas;
 
 		if(++_point_index != _h_points.length) {
@@ -254,6 +270,7 @@ var Hyperlapse = function(container, params) {
 		_point_index = 0;
 
 		animate();
+		console.log("load is complete !")
 
 		if (self.onLoadComplete) self.onLoadComplete(e);
 	};
@@ -728,6 +745,11 @@ var Hyperlapse = function(container, params) {
 		_point_index = 0;
 		_loader.composePanorama(_h_points[_point_index].pano_id);
 	};
+
+	this.zip = function(){
+		var blob = zip.generate({type:"blob"}); 
+		saveAs(blob, "hyperlapse.zip");
+	}
 
 	/**
 	 * @fires Hyperlapse#onLoadCanceled
